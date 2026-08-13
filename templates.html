@@ -1,0 +1,362 @@
+<!-- 
+ملف مساعد - نسخة مبسطة ومعدلة من index.html
+يمكن استخدامها كقالب للواجهات الجديدة
+-->
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قالب واجهة - TechOrderWeb</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+        
+        * {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: #0B1020;
+            color: #FFFFFF;
+        }
+
+        .btn-primary {
+            background-color: #FF8A00;
+            color: #0B1020;
+            border-radius: 12px;
+            font-weight: 700;
+            padding: 12px 30px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #ff9e1f;
+            transform: scale(1.05);
+        }
+
+        .card-custom {
+            background-color: #1A2238;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .card-custom:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 138, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="min-h-screen py-20 px-4">
+        <div class="max-w-4xl mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold mb-4">
+                    <span class="text-orange-500">قالب</span> 
+                    <span class="text-white">واجهة جديدة</span>
+                </h1>
+                <p class="text-gray-300 text-lg">
+                    نموذج لإضافة واجهات جديدة للتطبيق
+                </p>
+            </div>
+
+            <!-- Template Examples -->
+            <div class="space-y-12">
+                
+                <!-- Example 1: Simple Card -->
+                <div class="card-custom p-8">
+                    <h2 class="text-2xl font-bold mb-4">📝 نوع واجهة 1: بطاقة بسيطة</h2>
+                    <p class="text-gray-300 mb-4">
+                        استخدم هذا القالب للواجهات البسيطة والمعلومات الأساسية
+                    </p>
+                    <div class="bg-gray-800 p-6 rounded-lg text-center">
+                        <div class="text-6xl mb-4">🛍️</div>
+                        <h3 class="font-bold mb-2">عنوان المحتوى</h3>
+                        <p class="text-sm text-gray-400">وصف قصير عن المحتوى</p>
+                    </div>
+                </div>
+
+                <!-- Example 2: Two Column Layout -->
+                <div class="card-custom p-8">
+                    <h2 class="text-2xl font-bold mb-4">🎨 نوع واجهة 2: تخطيط ثنائي الأعمدة</h2>
+                    <p class="text-gray-300 mb-6">
+                        اجمع بين الصورة والنص للحصول على تخطيط احترافي
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <ul class="space-y-3">
+                                <li class="flex items-center gap-3">
+                                    <span class="text-orange-500">✓</span>
+                                    <span>ميزة أولى مهمة</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <span class="text-orange-500">✓</span>
+                                    <span>ميزة ثانية قوية</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <span class="text-orange-500">✓</span>
+                                    <span>ميزة ثالثة فريدة</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-gray-800 p-8 rounded-lg text-center">
+                            <div class="text-8xl">📱</div>
+                            <p class="text-gray-400 mt-4">صورة أو رسم توضيحي</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Example 3: Grid Layout -->
+                <div class="card-custom p-8">
+                    <h2 class="text-2xl font-bold mb-4">🎯 نوع واجهة 3: تخطيط شبكي</h2>
+                    <p class="text-gray-300 mb-6">
+                        استخدم الشبكة لعرض عدة عناصر متعددة
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Item 1 -->
+                        <div class="bg-gray-800 p-6 rounded-lg text-center hover:bg-opacity-80 transition">
+                            <div class="text-4xl mb-3">🍕</div>
+                            <h3 class="font-bold mb-2">العنصر الأول</h3>
+                            <p class="text-sm text-gray-400">وصف العنصر الأول</p>
+                        </div>
+                        <!-- Item 2 -->
+                        <div class="bg-gray-800 p-6 rounded-lg text-center hover:bg-opacity-80 transition">
+                            <div class="text-4xl mb-3">🍔</div>
+                            <h3 class="font-bold mb-2">العنصر الثاني</h3>
+                            <p class="text-sm text-gray-400">وصف العنصر الثاني</p>
+                        </div>
+                        <!-- Item 3 -->
+                        <div class="bg-gray-800 p-6 rounded-lg text-center hover:bg-opacity-80 transition">
+                            <div class="text-4xl mb-3">🍜</div>
+                            <h3 class="font-bold mb-2">العنصر الثالث</h3>
+                            <p class="text-sm text-gray-400">وصف العنصر الثالث</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Example 4: Form Template -->
+                <div class="card-custom p-8">
+                    <h2 class="text-2xl font-bold mb-4">📋 نوع واجهة 4: نموذج/Form</h2>
+                    <p class="text-gray-300 mb-6">
+                        قالب للحصول على بيانات من المستخدم
+                    </p>
+                    <form class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-bold mb-2">الاسم الكامل</label>
+                            <input type="text" placeholder="أدخل اسمك" 
+                                   class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-orange-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold mb-2">البريد الإلكتروني</label>
+                            <input type="email" placeholder="أدخل بريدك" 
+                                   class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-orange-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold mb-2">الرسالة</label>
+                            <textarea placeholder="اكتب رسالتك" rows="5"
+                                      class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-orange-500"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary w-full py-3">إرسال</button>
+                    </form>
+                </div>
+
+                <!-- Example 5: Comparison Table -->
+                <div class="card-custom p-8">
+                    <h2 class="text-2xl font-bold mb-4">📊 نوع واجهة 5: الجداول المقارنة</h2>
+                    <p class="text-gray-300 mb-6">
+                        قارن بين خطط أو منتجات مختلفة
+                    </p>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-center">
+                            <thead>
+                                <tr class="border-b-2 border-orange-500">
+                                    <th class="px-4 py-3">الميزة</th>
+                                    <th class="px-4 py-3">الخطة الأساسية</th>
+                                    <th class="px-4 py-3">الخطة المتقدمة</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-gray-700">
+                                    <td class="px-4 py-3 text-right">السعر الشهري</td>
+                                    <td class="px-4 py-3">مجاني</td>
+                                    <td class="px-4 py-3 text-orange-500 font-bold">99 ر.س</td>
+                                </tr>
+                                <tr class="border-b border-gray-700">
+                                    <td class="px-4 py-3 text-right">الدعم الفني</td>
+                                    <td class="px-4 py-3">❌</td>
+                                    <td class="px-4 py-3">✅</td>
+                                </tr>
+                                <tr class="border-b border-gray-700">
+                                    <td class="px-4 py-3 text-right">عدد الطلبات</td>
+                                    <td class="px-4 py-3">محدود</td>
+                                    <td class="px-4 py-3">غير محدود</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Example 6: Steps/Process -->
+                <div class="card-custom p-8">
+                    <h2 class="text-2xl font-bold mb-4">👣 نوع واجهة 6: الخطوات/المراحل</h2>
+                    <p class="text-gray-300 mb-6">
+                        عرض العملية خطوة بخطوة
+                    </p>
+                    <div class="space-y-4">
+                        <!-- Step 1 -->
+                        <div class="flex gap-6">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-12 w-12 rounded-full bg-orange-500 text-gray-900 font-bold">1</div>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="font-bold mb-1">الخطوة الأولى</h3>
+                                <p class="text-gray-400 text-sm">وصف الخطوة الأولى والعمل المطلوب</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="flex gap-6">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-12 w-12 rounded-full bg-orange-500 text-gray-900 font-bold">2</div>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="font-bold mb-1">الخطوة الثانية</h3>
+                                <p class="text-gray-400 text-sm">وصف الخطوة الثانية والعمل المطلوب</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="flex gap-6">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-12 w-12 rounded-full bg-orange-500 text-gray-900 font-bold">3</div>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="font-bold mb-1">الخطوة الثالثة</h3>
+                                <p class="text-gray-400 text-sm">وصف الخطوة الثالثة والعمل المطلوب</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Example 7: Hero Section -->
+                <div class="card-custom p-12 text-center">
+                    <h2 class="text-2xl font-bold mb-4">🚀 نوع واجهة 7: بطل الصفحة (Hero)</h2>
+                    <p class="text-gray-300 mb-6">
+                        قسم جذاب لجذب الانتباه
+                    </p>
+                    <div class="bg-gradient-to-b from-gray-800 to-gray-900 p-12 rounded-lg">
+                        <h3 class="text-2xl font-bold mb-3 text-orange-500">عنوان جذاب وقوي</h3>
+                        <p class="text-gray-300 mb-6">
+                            وصف قصير وجذاب يوضح الفائدة الرئيسية
+                        </p>
+                        <button class="btn-primary">اضغط هنا</button>
+                    </div>
+                </div>
+
+                <!-- Example 8: Testimonial -->
+                <div class="card-custom p-8">
+                    <h2 class="text-2xl font-bold mb-4">⭐ نوع واجهة 8: التقييمات/الشهادات</h2>
+                    <p class="text-gray-300 mb-6">
+                        عرض آراء المستخدمين والعملاء
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <div class="flex gap-1 mb-3">
+                                <span class="text-yellow-400">⭐</span>
+                                <span class="text-yellow-400">⭐</span>
+                                <span class="text-yellow-400">⭐</span>
+                                <span class="text-yellow-400">⭐</span>
+                                <span class="text-yellow-400">⭐</span>
+                            </div>
+                            <p class="text-sm mb-4">"تطبيق رائع وسهل الاستخدام! الخدمة سريعة والدعم ممتاز!"</p>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center font-bold">أ</div>
+                                <div class="text-sm">
+                                    <div class="font-bold">أحمد محمد</div>
+                                    <div class="text-gray-400">مستخدم السعودية</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <div class="flex gap-1 mb-3">
+                                <span class="text-yellow-400">⭐</span>
+                                <span class="text-yellow-400">⭐</span>
+                                <span class="text-yellow-400">⭐</span>
+                                <span class="text-yellow-400">⭐</span>
+                                <span class="text-yellow-400">⭐</span>
+                            </div>
+                            <p class="text-sm mb-4">"أفضل تطبيق لطلب الطعام! توصيل سريع وأسعار رائعة!"</p>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center font-bold">ف</div>
+                                <div class="text-sm">
+                                    <div class="font-bold">فاطمة علي</div>
+                                    <div class="text-gray-400">مستخدم الإمارات</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Example 9: Alert/Notification -->
+                <div class="card-custom p-8">
+                    <h2 class="text-2xl font-bold mb-4">🔔 نوع واجهة 9: التنبيهات والرسائل</h2>
+                    <p class="text-gray-300 mb-6">
+                        عرض الرسائل المهمة والتنبيهات
+                    </p>
+                    <div class="space-y-4">
+                        <div class="bg-green-900 bg-opacity-30 border-r-4 border-green-500 p-4 rounded">
+                            <div class="flex items-center gap-3">
+                                <span class="text-2xl">✅</span>
+                                <div>
+                                    <div class="font-bold">نجاح!</div>
+                                    <div class="text-sm text-gray-300">تم إكمال العملية بنجاح</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-red-900 bg-opacity-30 border-r-4 border-red-500 p-4 rounded">
+                            <div class="flex items-center gap-3">
+                                <span class="text-2xl">❌</span>
+                                <div>
+                                    <div class="font-bold">خطأ!</div>
+                                    <div class="text-sm text-gray-300">حدثت مشكلة ما، يرجى المحاولة مجدداً</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-blue-900 bg-opacity-30 border-r-4 border-blue-500 p-4 rounded">
+                            <div class="flex items-center gap-3">
+                                <span class="text-2xl">ℹ️</span>
+                                <div>
+                                    <div class="font-bold">معلومة!</div>
+                                    <div class="text-sm text-gray-300">هذه رسالة معلومات مهمة</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Tips Section -->
+            <div class="mt-16 p-8 bg-orange-500 bg-opacity-10 border-l-4 border-orange-500 rounded-lg">
+                <h3 class="text-xl font-bold mb-4">💡 نصائح الاستخدام</h3>
+                <ul class="space-y-2 text-gray-300">
+                    <li>✓ استخدم هذه الأمثلة كقوالب لواجهاتك الجديدة</li>
+                    <li>✓ عدّل الألوان والنصوص حسب احتياجاتك</li>
+                    <li>✓ اجمع بين عدة أنواع واجهات في صفحة واحدة</li>
+                    <li>✓ تأكد من توافقية الرسائل مع القوائم والنصوص</li>
+                    <li>✓ اختبر على جميع الأجهزة قبل النشر</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechOrderWeb - تطبيق طلب الطعام الذكي</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+        
+        * {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        :root {
+            --primary-dark: #0B1020;
+            --primary-orange: #FF8A00;
+            --text-white: #FFFFFF;
+            --card-bg: #1A2238;
+        }
+
+        body {
+            background-color: var(--primary-dark);
+            color: var(--text-white);
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-delay-1 { animation-delay: 0.1s; }
+        .fade-in-delay-2 { animation-delay: 0.2s; }
+        .fade-in-delay-3 { animation-delay: 0.3s; }
+        .fade-in-delay-4 { animation-delay: 0.4s; }
+        .fade-in-delay-5 { animation-delay: 0.5s; }
+        .fade-in-delay-6 { animation-delay: 0.6s; }
+
+        .card-custom {
+            background-color: var(--card-bg);
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .card-custom:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 138, 0, 0.2);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-orange);
+            color: var(--primary-dark);
+            border-radius: 12px;
+            font-weight: 700;
+            padding: 12px 30px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #ff9e1f;
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background-color: var(--card-bg);
+            color: var(--primary-orange);
+            border: 2px solid var(--primary-orange);
+            border-radius: 12px;
+            font-weight: 700;
+            padding: 12px 30px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-orange);
+            color: var(--primary-dark);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-orange), #ff6b6b);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .screen-mockup {
+            /* phone screenshots are 1080x2226 (portrait). Use a narrow max width to keep phone-like appearance */
+            width: min(100%, 360px);
+            aspect-ratio: 1080 / 2226; /* preserves actual screenshot proportions */
+            background-color: var(--card-bg);
+            border-radius: 28px;
+            border: 8px solid rgba(17, 17, 17, 0.9);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 0 0 6px #111;
+            overflow: hidden;
+            position: relative;
+            margin: 20px auto;
+        }
+
+        .screen-mockup::before {
+            /* small top notch / bezel decoration scaled for portrait mockups */
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 18px;
+            background-color: #000;
+            border-radius: 0 0 14px 14px;
+            z-index: 10;
+            opacity: 0.9;
+        }
+
+        .screen-content {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background: linear-gradient(180deg, #1a1f2c 0%, #0f172a 100%);
+        }
+
+        .screen-content img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 20px;
+            transition: transform 0.3s ease;
+            background-color: #0b0f16;
+        }
+
+        .screen-mockup:hover .screen-content img {
+            transform: scale(1.02);
+        }
+
+        .quality-badge {
+            display: inline-block;
+            background-color: var(--primary-orange);
+            color: var(--primary-dark);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 12px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--primary-orange), #ff9e1f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .counter-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background-color: var(--primary-orange);
+            color: var(--primary-dark);
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 18px;
+            transition: all 0.2s ease;
+        }
+
+        .counter-btn:hover {
+            background-color: #ff9e1f;
+        }
+
+        .counter-display {
+            padding: 8px 20px;
+            background-color: var(--primary-orange);
+            color: var(--primary-dark);
+            border-radius: 8px;
+            font-weight: 600;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-orange);
+            border-radius: 4px;
+        }
+
+        .price-highlight {
+            color: var(--primary-orange);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .brand-logo {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .brand-logo-lg {
+            width: min(320px, 72vw);
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.35));
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <nav class="fixed top-0 w-full z-50 backdrop-blur-md border-b border-orange-900">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <img src="1000186393-removebg-preview.png" alt="TechOrderWeb" class="brand-logo">
+                <div class="text-2xl md:text-3xl font-bold leading-none">
+                    <span class="text-orange-500">Tech</span><span class="text-white">Order</span>
+                </div>
+            </div>
+            <div id="navMenu" class="hidden md:flex gap-8">
+                <a href="#features" class="hover:text-orange-500 transition">المميزات</a>
+                <a href="#screens" class="hover:text-orange-500 transition">الواجهات</a>
+                <a href="#contact" class="hover:text-orange-500 transition">التواصل</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4 text-center">
+        <div class="max-w-4xl mx-auto fade-in">
+            <div class="flex justify-center mb-6 fade-in-delay-1">
+                <img src="1000186393-removebg-preview.png" alt="شعار TechOrder" class="brand-logo-lg">
+            </div>
+            <span class="quality-badge">التطبيق الأول من نوعه في مدينة الحسكة</span>
+            <h1 class="section-title mb-6">
+                اطلب طعامك بذكاء وسهولة
+            </h1>
+            <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+                تطبيق TechOrder هو منصة متكاملة لطلب الطعام من مطاعمك المفضلة أو عبر خدمة الديليفري. 
+                واجهة سهلة الاستخدام، وتوصيل سريع وموثوق.
+            </p>
+            <div class="flex gap-4 justify-center flex-wrap">
+                <button class="btn-primary fade-in-delay-1">تحميل التطبيق</button>
+                <button class="btn-secondary fade-in-delay-2">التعرف على المميزات</button>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="section-title text-center mb-16">مميزات التطبيق</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Feature 1 -->
+                <div class="card-custom p-8 text-center fade-in fade-in-delay-1">
+                    <div class="feature-icon">🍔</div>
+                    <h3 class="text-xl font-bold mb-4">عدة مطاعم</h3>
+                    <p class="text-gray-300">
+                        تعاون مع عدة مطاعم لتوفير خيارات أوسع وتجربة طلب أكثر تنوعاً
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="card-custom p-8 text-center fade-in fade-in-delay-2">
+                    <div class="feature-icon">🎙️</div>
+                    <h3 class="text-xl font-bold mb-4">تسجيل صوتي للخدمات</h3>
+                    <p class="text-gray-300">
+                        كافة خدمات التوصيل يمكن طلبها بسهولة عبر تسجيل صوتي واضح وسريع
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="card-custom p-8 text-center fade-in fade-in-delay-3">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="text-xl font-bold mb-4">توصيل سريع</h3>
+                    <p class="text-gray-300">
+                        نضمن سرعة عالية في تنفيذ الطلبات والوصول إلى العميل بأقصر وقت
+                    </p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="card-custom p-8 text-center fade-in fade-in-delay-4">
+                    <div class="feature-icon">🔒</div>
+                    <h3 class="text-xl font-bold mb-4">بساطة وسهولة وأمان</h3>
+                    <p class="text-gray-300">
+                        واجهة بسيطة وسهلة الاستخدام مع حماية عالية لبيانات المستخدم وطلباته
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section id="screens" class="py-20 px-4 bg-black bg-opacity-50">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="section-title text-center mb-4">واجهات التطبيق</h2>
+            <p class="text-center text-gray-300 mb-16 max-w-2xl mx-auto">
+                اكتشف واجهة التطبيق الجميلة والسهلة الاستخدام. صور توضيحية لكل شاشة من شاشات التطبيق لتجربة مستخدم سلسة وممتعة.
+            </p>
+
+            <!-- Screen 1: Registration -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20 items-center fade-in fade-in-delay-1">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-orange-500">📝 صفحة التسجيل</h3>
+                    <p class="text-gray-300 mb-4 leading-relaxed">
+                        انشئ حسابك الخاص بسهولة من خلال إدخال:
+                    </p>
+                    <ul class="space-y-3 text-gray-300">
+                        <li>✓ رقم الهاتف: لتلقي إشعارات الطلبات والعروض</li>
+                        <li>✓ الاسم الكامل: لتخصيص تجربتك</li>
+                        <li>✓ كلمة المرور: لحماية حسابك (يجب ان  تكون على الاقل من 6 خانات)</li>
+                    </ul>
+                </div>
+                <div class="screen-mockup fade-in fade-in-delay-2">
+                    <div class="screen-content bg-gradient-to-b from-gray-800 to-gray-900 p-4">
+                        <img src="images/signup.jpg" alt="واجهة التسجيل" class="app-screen-image">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screen 2: Login -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20 items-center fade-in fade-in-delay-2">
+                <div class="screen-mockup fade-in fade-in-delay-2 md:order-2">
+                    <div class="screen-content bg-gradient-to-b from-gray-800 to-gray-900 p-4">
+                        <img src="images/login.jpg" alt="واجهة تسجيل الدخول" class="app-screen-image">
+                    </div>
+                </div>
+                <div class="md:order-1">
+                    <h3 class="text-2xl font-bold mb-4 text-orange-500">🔐 صفحة تسجيل الدخول</h3>
+                    <p class="text-gray-300 mb-4 leading-relaxed">
+                        دخول سريع وآمن لحسابك الخاص من خلال:
+                    </p>
+                    <ul class="space-y-3 text-gray-300">
+                        <li>✓ رقم الهاتف: المسجل في الحساب</li>
+                        <li>✓ كلمة المرور: الخاصة بك</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Screen 3: Order Type Selection -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20 items-center fade-in fade-in-delay-3">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-orange-500">📋 اختيار نوع الطلب</h3>
+                    <p class="text-gray-300 mb-4 leading-relaxed">
+                        اختر طريقة الطلب المناسبة لك:
+                    </p>
+                    <ul class="space-y-3 text-gray-300">
+                        <li>✓ <span class="text-orange-500">طلب من مطعم موجود</span>: اختر من قائمة المطاعم المتعاقدة</li>
+                        <li>✓ <span class="text-orange-500">طلب من ديليفري</span>: اطلب أي شيء والتطبيق يوفره</li>
+                        <li>✓ واجهة بسيطة مع أيقونات واضحة</li>
+                        <li>✓ انتقال سلس بين الخيارات</li>
+                    </ul>
+                </div>
+                <div class="screen-mockup fade-in fade-in-delay-4">
+                    <div class="screen-content bg-gradient-to-b from-gray-800 to-gray-900 p-4">
+                        <img src="images/home.jpg" alt="واجهة الرئيسية" class="app-screen-image">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screen 4: Restaurants List -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20 items-center fade-in fade-in-delay-4">
+                <div class="screen-mockup fade-in fade-in-delay-4 md:order-2">
+                    <div class="screen-content bg-gradient-to-b from-gray-800 to-gray-900 p-4">
+                        <img src="images/rest.jpg" alt="عرض المطاعم" class="app-screen-image">
+                    </div>
+                </div>
+                <div class="md:order-1">
+                    <h3 class="text-2xl font-bold mb-4 text-orange-500">🏪 صفحة عرض المطاعم</h3>
+                    <p class="text-gray-300 mb-4 leading-relaxed">
+                        قائمة مطاعمنا المتعاقدة بسهولة:
+                    </p>
+                    <ul class="space-y-3 text-gray-300">
+                        <li>✓ صور المطاعم وأسماؤها</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Screen 5: Menu & Quantity -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20 items-center fade-in fade-in-delay-5">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-orange-500">🍽️ قائمة المأكولات</h3>
+                    <p class="text-gray-300 mb-4 leading-relaxed">
+                        قائمة شاملة بجميع الوجبات والأسعار:
+                    </p>
+                    <ul class="space-y-3 text-gray-300">
+                        <li>✓ صور الوجبات عالية الجودة</li>
+                        <li>✓ أسماء وأسعار الوجبات</li>
+                        <li>✓ <span class="text-orange-500">أزرار كمية (+/-):</span> لتحديد عدد الوجبات</li>
+                        <li>✓ عرض الكمية الحالية المختارة</li>
+                        <li>✓ وصف الوجبة</li>
+                    </ul>
+                </div>
+                <div class="screen-mockup fade-in fade-in-delay-4">
+                    <div class="screen-content bg-gradient-to-b from-gray-800 to-gray-900 p-4">
+                        <img src="images/menu.jpg" alt="قائمة الطعام" class="app-screen-image">
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20 items-center fade-in fade-in-delay-6">
+                <div class="screen-mockup fade-in fade-in-delay-4 md:order-2">
+                    <div class="screen-content bg-gradient-to-b from-gray-800 to-gray-900 p-4">
+                        <img src="images/orderinfo.jpg" alt="واجهة إدخال باقي معلومات الطلب" class="app-screen-image">
+                    </div>
+                </div>
+                <div class="md:order-1">
+                    <h3 class="text-2xl font-bold mb-4 text-orange-500">📦 إدخال باقي معلومات الطلب</h3>
+                    <p class="text-gray-300 mb-4 leading-relaxed">
+                        بعد اختيار الطعام، يطلب التطبيق باقي المعلومات اللازمة لتجهيز الطلب:
+                    </p>
+                    <ul class="space-y-3 text-gray-300">
+                        <li>عرض الطلبات المختارة مع الكمية وسعر كل صنف مضروبا بكميته المحددة</li>
+                        <li>✓ اختيار الحي من قائمة الأحياء المتاحة</li>
+                        <li>✓ عنوان التسليم أو الموقع</li>
+                        <li>✓ تفاصيل الملاحظات الخاصة بالطلب</li>
+                        <li>✓ عرض سعر الوجبات مع سعر التوصيل مع الاجمالي</li>
+                        <li>✓ تأكيد الطلب قبل الإرسال</li>
+                    </ul>
+                </div>
+            </div>
+
+             <!-- Screen 7: Voice Order -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20 items-center fade-in fade-in-delay-5">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-orange-500">🎙️ واجهة الطلب الصوتي</h3>
+                    <p class="text-gray-300 mb-4 leading-relaxed">
+                        خدمة الطلب الصوتي تجعل التفاعل مع التطبيق أسرع وأسهل:
+                    </p>
+                    <ul class="space-y-3 text-gray-300">
+                        <li>✓ تسجيل صوتي مباشر لتحديد الطلب</li>
+                        <li>✓ فهم أوامر المستخدم بدقة وسرعة</li>
+                        <li>✓ عرض الملاحظات الصوتية بشكل واضح</li>
+                    </ul>
+                </div>
+                <div class="screen-mockup fade-in fade-in-delay-4">
+                    <div class="screen-content bg-gradient-to-b from-gray-800 to-gray-900 p-4">
+                        <img src="images/voiceorder.jpg" alt="واجهة الطلب الصوتي" class="app-screen-image">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screen 6: Order Completion -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20 items-center fade-in fade-in-delay-6">
+                <div class="screen-mockup fade-in fade-in-delay-4 md:order-2">
+                    <div class="screen-content bg-gradient-to-b from-gray-800 to-gray-900 p-4">
+                        <img src="images/myorder.jpg" alt="تأكيد الطلب" class="app-screen-image">
+                    </div>
+                </div>
+                <div class="md:order-1">
+                    <h3 class="text-2xl font-bold mb-4 text-orange-500">واجهة تتبع طلباتي</h3>
+                    <p class="text-gray-300 mb-4 leading-relaxed">
+                        مراجعة شاملة لجميع طلباتي وحسب التاريح:
+                    </p>
+                    <ul class="space-y-3 text-gray-300">
+                        <li>✓ قائمة الطلبات التي تم انشاءها</li>
+                        <li>✓ <span class="text-orange-500">تتبع حالة الطلب</span>: تتبع حالة كل طلب ومعرفة المرحلة التي وصل لها</li>
+                        <li>✓ <span class="text-orange-500"> عرض التفاصيل:</span> عرض تفاصيل كل طلب ونوعه</li>
+                    </ul>
+                </div>
+            </div>
+
+           
+
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 px-4 bg-black bg-opacity-30">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="section-title text-center mb-16">الأسئلة الشائعة</h2>
+            
+            <div class="space-y-6">
+                <div class="card-custom p-6 cursor-pointer hover:bg-orange-500 hover:bg-opacity-10 transition" onclick="toggleFAQ(this)">
+                    <h3 class="text-lg font-bold flex justify-between items-center">
+                        هل التطبيق آمن؟
+                        <span class="text-2xl">▼</span>
+                    </h3>
+                    <p class="text-gray-300 mt-4 hidden">
+                        نعم، التطبيق يستخدم أحدث تقنيات الأمان والتشفير لحماية بيانات المستخدمين والعمليات المالية.
+                    </p>
+                </div>
+
+                <div class="card-custom p-6 cursor-pointer hover:bg-orange-500 hover:bg-opacity-10 transition" onclick="toggleFAQ(this)">
+                    <h3 class="text-lg font-bold flex justify-between items-center">
+                        ما هي رسوم التوصيل؟
+                        <span class="text-2xl">▼</span>
+                    </h3>
+                    <p class="text-gray-300 mt-4 hidden">
+                        تختلف رسوم التوصيل حسب الحي والمسافة. يتم عرضها بوضوح قبل تأكيد الطلب.
+                    </p>
+                </div>
+
+                <div class="card-custom p-6 cursor-pointer hover:bg-orange-500 hover:bg-opacity-10 transition" onclick="toggleFAQ(this)">
+                    <h3 class="text-lg font-bold flex justify-between items-center">
+                        كم يستغرق وقت التوصيل؟
+                        <span class="text-2xl">▼</span>
+                    </h3>
+                    <p class="text-gray-300 mt-4 hidden">
+                        يتراوح وقت التوصيل من 30-45 دقيقة حسب المطعم والموقع. يتم تحديثك بشكل مستمر.
+                    </p>
+                </div>
+
+                <div class="card-custom p-6 cursor-pointer hover:bg-orange-500 hover:bg-opacity-10 transition" onclick="toggleFAQ(this)">
+                    <h3 class="text-lg font-bold flex justify-between items-center">
+                        هل يمكن إلغاء الطلب؟
+                        <span class="text-2xl">▼</span>
+                    </h3>
+                    <p class="text-gray-300 mt-4 hidden">
+                        نعم، يمكنك إلغاء الطلب قبل تحضيره من المطعم.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="section-title mb-12">تواصل معنا</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="card-custom p-8 fade-in fade-in-delay-1">
+                    <div class="text-4xl mb-4">📧</div>
+                    <h3 class="text-xl font-bold mb-3">البريد الإلكتروني</h3>
+                    <p class="text-gray-300">
+                        <a href="mailto:techoeder2026@gmail.com" class="text-orange-500 hover:underline">
+                            techoeder2026@gmail.com
+                        </a>
+                    </p>
+                </div>
+
+                <div class="card-custom p-8 fade-in fade-in-delay-2">
+                    <div class="text-4xl mb-4">📱</div>
+                    <h3 class="text-xl font-bold mb-3">رقم الهاتف</h3>
+                    <p class="text-gray-300">
+                        <a href="tel:098102144" class="text-orange-500 hover:underline">
+                            0981102144
+                        </a>
+                        <br/>
+                        <a href="tel:098102144" class="text-orange-500 hover:underline">
+                            0932968354
+                        </a>
+                    </p>
+                </div>
+
+                <div class="card-custom p-8 fade-in fade-in-delay-3">
+                    <div class="text-4xl mb-4">💬</div>
+                    <h3 class="text-xl font-bold mb-3">وسائل التواصل</h3>
+                    <div class="flex gap-4 justify-center text-2xl">
+                        <a href="https://www.facebook.com/share/1BegT7CkT2/" class="text-orange-500 hover:scale-125 transition">f</a>
+                        <a href="https://www.instagram.com/_techorder?igsh=czVxbjU2MGI4Z2du" class="text-orange-500 hover:scale-125 transition">📷</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-700 py-12 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="1000186393-removebg-preview.png" alt="شعار TechOrderWeb" class="brand-logo">
+                        <h3 class="text-xl font-bold text-orange-500">TechOrder</h3>
+                    </div>
+                    <p class="text-gray-400">تطبيق طلب الطعام الذكي</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">الصفحات</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#features" class="hover:text-orange-500">المميزات</a></li>
+                        <li><a href="#screens" class="hover:text-orange-500">الواجهات</a></li>
+                        <li><a href="#download" class="hover:text-orange-500">التحميل</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="border-gray-700 mb-8">
+            
+            <div class="text-center text-gray-400">
+                <p>&copy; 2024 TechOrder. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer for Fade In Effect
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // FAQ Toggle
+        function toggleFAQ(element) {
+            const answer = element.querySelector('p');
+            answer.classList.toggle('hidden');
+            const icon = element.querySelector('span');
+            icon.style.transform = answer.classList.contains('hidden') ? 'rotate(0)' : 'rotate(180deg)';
+        }
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll animation
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                navbar.style.backgroundColor = 'rgba(11, 16, 32, 0.9)';
+            } else {
+                navbar.style.backgroundColor = 'transparent';
+            }
+        });
+
+        // Counter functionality for demo
+        document.querySelectorAll('.counter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const display = this.parentElement.querySelector('.counter-display');
+                let value = parseInt(display.textContent);
+                if (this.textContent === '+') {
+                    value++;
+                } else if (value > 0) {
+                    value--;
+                }
+                display.textContent = value;
+            });
+        });
+    </script>
+</body>
+</html>
