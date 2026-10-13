@@ -49,6 +49,20 @@
             transform: translateY(-5px);
             box-shadow: 0 15px 40px rgba(255, 138, 0, 0.2);
         }
+
+        body { overflow-x: hidden; }
+        img, input, textarea { max-width: 100%; }
+        table { min-width: 480px; }
+
+        @media (max-width: 640px) {
+            .min-h-screen { padding-top: 2rem; padding-bottom: 2rem; }
+            .card-custom { padding: 1.25rem !important; }
+            h1 { font-size: clamp(1.75rem, 8vw, 2.25rem) !important; line-height: 1.35; }
+            h2 { font-size: 1.25rem !important; line-height: 1.5; }
+            .text-8xl { font-size: 4rem; }
+            .text-4xl { font-size: 2rem; }
+            .btn-primary { padding: 11px 20px; }
+        }
     </style>
 </head>
 <body>
@@ -87,7 +101,7 @@
                     <p class="text-gray-300 mb-6">
                         اجمع بين الصورة والنص للحصول على تخطيط احترافي
                     </p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 items-center">
                         <div>
                             <ul class="space-y-3">
                                 <li class="flex items-center gap-3">
